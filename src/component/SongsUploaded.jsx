@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {styled} from '@mui/system';
-import TablePagination, {
+import {
+    TablePagination,
     tablePaginationClasses as classes,
-} from '@mui/base/TablePagination';
+} from '@mui/base';
 import {Link} from "react-router-dom";
 import MenuAppBar from "./NavBar";
 import UserAddSong from "./UserAddSong";
