@@ -1,16 +1,16 @@
 import {useEffect} from 'react';
 import PropTypes from 'prop-types';
-import  useAutocomplete  from '@mui/base/useAutocomplete';
+import {useAutocomplete} from '@mui/base';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
-import { styled } from '@mui/material/styles';
-import { autocompleteClasses } from '@mui/material/Autocomplete';
+import {styled} from '@mui/material/styles';
+import {autocompleteClasses} from '@mui/material/Autocomplete';
 
 const Root = styled('div')(
-  ({ theme }) => `
+    ({theme}) => `
   color: ${
-    theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.65)' : 'rgba(0,0,0,.85)'
-  };
+        theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.65)' : 'rgba(0,0,0,.85)'
+    };
   font-size: 14px;
 `,
 );
@@ -22,7 +22,7 @@ const Label = styled('label')`
 `;
 
 const InputWrapper = styled('div')(
-  ({ theme }) => `
+    ({theme}) => `
   width: 100%;
   border: 1px solid ${theme.palette.mode === 'dark' ? '#434343' : '#d9d9d9'};
   background-color: ${theme.palette.mode === 'dark' ? '#141414' : '#fff'};
@@ -43,7 +43,7 @@ const InputWrapper = styled('div')(
   & input {
     background-color: ${theme.palette.mode === 'dark' ? '#141414' : '#fff'};
     color: ${
-      theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.65)' : 'rgba(0,0,0,.85)'
+        theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.65)' : 'rgba(0,0,0,.85)'
     };
     height: 30px;
     box-sizing: border-box;
@@ -59,30 +59,30 @@ const InputWrapper = styled('div')(
 );
 
 function Tag(props) {
-  const { label, onDelete, ...other } = props;
-  return (
-    <div {...other}>
-      <span>{label}</span>
-      <CloseIcon onClick={onDelete} />
-    </div>
-  );
+    const {label, onDelete, ...other} = props;
+    return (
+        <div {...other}>
+            <span>{label}</span>
+            <CloseIcon onClick={onDelete}/>
+        </div>
+    );
 }
 
 Tag.propTypes = {
-  label: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired,
+    label: PropTypes.string.isRequired,
+    onDelete: PropTypes.func.isRequired,
 };
 
 const StyledTag = styled(Tag)(
-  ({ theme }) => `
+    ({theme}) => `
   display: flex;
   align-items: center;
   height: 24px;
   margin: 2px;
   line-height: 22px;
   background-color: ${
-    theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.08)' : '#fafafa'
-  };
+        theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.08)' : '#fafafa'
+    };
   border: 1px solid ${theme.palette.mode === 'dark' ? '#303030' : '#e8e8e8'};
   border-radius: 2px;
   box-sizing: content-box;
@@ -110,7 +110,7 @@ const StyledTag = styled(Tag)(
 );
 
 const Listbox = styled('ul')(
-  ({ theme }) => `
+    ({theme}) => `
   width: 300px;
   margin: 2px 0 0;
   padding: 0;
@@ -156,50 +156,50 @@ const Listbox = styled('ul')(
 `,
 );
 
-export default function AutocompleteTextField({setValue,inputText,datalist,formField,defaultValues}) {
-  const {
-    getRootProps,
-    getInputLabelProps,
-    getInputProps,
-    getTagProps,
-    getListboxProps,
-    getOptionProps,
-    groupedOptions,
-    value,
-    focused,
-    setAnchorEl,
-  } = useAutocomplete({
-    id: 'customized-hook-demo',
-    defaultValue: defaultValues,
-    multiple: true,
-    options: datalist,
-    getOptionLabel: (option) => option.name,
-  });
+export default function AutocompleteTextField({setValue, inputText, datalist, formField, defaultValues}) {
+    const {
+        getRootProps,
+        getInputLabelProps,
+        getInputProps,
+        getTagProps,
+        getListboxProps,
+        getOptionProps,
+        groupedOptions,
+        value,
+        focused,
+        setAnchorEl,
+    } = useAutocomplete({
+        id: 'customized-hook-demo',
+        defaultValue: defaultValues,
+        multiple: true,
+        options: datalist,
+        getOptionLabel: (option) => option.name,
+    });
 
-  useEffect(()=>{
-    const formValue = value.map(e=>e._id)
-    setValue(formField, formValue, false)
-  },[value])
+    useEffect(() => {
+        const formValue = value.map(e => e._id)
+        setValue(formField, formValue, false)
+    }, [value])
 
-  return (
-    <Root>
-      <div {...getRootProps()}>
-        <Label {...getInputLabelProps()}>{inputText}</Label>
-        <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
-          {value.map((option, index) =>(<StyledTag label={option.name} {...getTagProps({ index })} />))}
-          <input {...getInputProps()} />
-        </InputWrapper>
-      </div>
-      {groupedOptions.length > 0 ? (
-        <Listbox {...getListboxProps()}>
-          {groupedOptions.map((option, index) => (
-                  <li {...getOptionProps({ option, index })}>
-                    <span>{option.name}</span>
-                    <CheckIcon fontSize="small" />
-                  </li>
-                ))}
-        </Listbox>
-      ) : null}
-    </Root>
-  );
+    return (
+        <Root>
+            <div {...getRootProps()}>
+                <Label {...getInputLabelProps()}>{inputText}</Label>
+                <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
+                    {value.map((option, index) => (<StyledTag label={option.name} {...getTagProps({index})} />))}
+                    <input {...getInputProps()} />
+                </InputWrapper>
+            </div>
+            {groupedOptions.length > 0 ? (
+                <Listbox {...getListboxProps()}>
+                    {groupedOptions.map((option, index) => (
+                        <li {...getOptionProps({option, index})}>
+                            <span>{option.name}</span>
+                            <CheckIcon fontSize="small"/>
+                        </li>
+                    ))}
+                </Listbox>
+            ) : null}
+        </Root>
+    );
 }
