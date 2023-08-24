@@ -98,7 +98,7 @@ export function SignupComponent() {
                     gender: values.gender,
                     avatar: values.avatar,
                 }
-                await axios.post("http://localhost:8000/auth/register", data);
+                await axios.post("https://back-end-spotify-clone.up.railway.app/auth/register", data);
                 navigate('/login');
             } catch (error) {
                 set_alert_exist_user(true);
