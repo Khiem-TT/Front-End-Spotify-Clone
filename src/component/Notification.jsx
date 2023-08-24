@@ -24,7 +24,7 @@ export default function Notification() {
 
     useEffect(() => {
         const eventSource = new EventSource(
-            "http://localhost:8000/sse/notifyInNavbar/" + userId
+            "https://back-end-spotify-clone.up.railway.app/sse/notifyInNavbar/" + userId
         );
 
         eventSource.onmessage = (event) => {
