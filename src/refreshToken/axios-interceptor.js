@@ -13,7 +13,7 @@ axiosInstance.interceptors.request.use(
             const now = Date.now() / 1000;
 
             if (decodedToken.exp < now) {
-               const tokens = await axios.get("http://localhost:8000/auth/request-refresh-token", {
+               const tokens = await axios.get("https://back-end-spotify-clone.up.railway.app/auth/request-refresh-token", {
                     headers: {
                         token: `Bearer ${accessToken}`,
                         refreshToken: refreshToken

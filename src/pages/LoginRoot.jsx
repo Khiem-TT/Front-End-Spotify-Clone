@@ -12,7 +12,7 @@ const LoginComponent = () => {
     const handleSubmit = () => {
         let obj = { email, password }
 
-        fetch(`http://localhost:8000/auth/login`, {
+        fetch(`https://back-end-spotify-clone.up.railway.app/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
